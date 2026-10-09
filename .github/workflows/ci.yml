@@ -1,0 +1,25 @@
+
+name: Continuous Integration
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Check HTML file
+        run: test -f index.html
+
+      - name: Validate HTML content
+        run: grep -q "MLOps Continuous Integration" index.html
+
+      - name: CI success
+        run: echo "CI validation passed successfully"
